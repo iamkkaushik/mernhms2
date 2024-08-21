@@ -12,19 +12,6 @@ import appointmentRouter from "./router/appointmentRouter.js";
 const app = express();
 config({ path: "./config.env" });
 
-
-const corsOptions = {
-  origin: "https://ornate-kitsune-306c64.netlify.app", // Update with your frontend URL
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  credentials: true,
-};
-
-// Enable CORS preflight for all routes
-app.options('*', cors(corsOptions)); 
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
-
 // app.use(
 //   cors({
 //     origin: ["http://localhost:5173", process.env.FRONTEND_URL_TWO],
@@ -32,11 +19,17 @@ app.use(cors(corsOptions));
 //     credentials: true,
 //   })
 // );
-app.use(cors()); 
-
+// app.use(cors()); 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// console.log(process.env.FRONTEND_URL_ONE);
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 // console.log(process.env.FRONTEND_URL_ONE);
 app.use(
   fileUpload({
