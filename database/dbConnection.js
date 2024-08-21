@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 
+const MONGO_URI='mongodb+srv://kaushikkodarapu10:LOkxw0GNlhB3TNWj@cluster1.gjdudq3.mongodb.net/hms?retryWrites=true&w=majority&appName=Cluster1'
+
 export const dbConnection = () => {
   mongoose
-    .connect(process.env.MONGO_URI, {
+    .connect(MONGO_URI, {
       // dbName: "MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM",
       dbName: "hms",
     })
