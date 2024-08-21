@@ -12,13 +12,26 @@ import appointmentRouter from "./router/appointmentRouter.js";
 const app = express();
 config({ path: "./config.env" });
 
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL_ONE, process.env.FRONTEND_URL_TWO],
-    method: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.FRONTEND_URL_ONE, process.env.FRONTEND_URL_TWO],
+//     method: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   })
+// );
+
+const corsOptions = {
+  origin: "https://ornate-kitsune-306c64.netlify.app", // Update with your frontend URL
+  methods: ["GET", "POST", "DELETE", "PUT"],
+  credentials: true,
+};
+
+// Enable CORS preflight for all routes
+app.options('*', cors(corsOptions)); 
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
 // app.use(cors()); 
 app.use(cookieParser());
 app.use(express.json());
