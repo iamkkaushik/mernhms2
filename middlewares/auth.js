@@ -25,7 +25,7 @@ export const isAdminAuthenticated = catchAsyncErrors(
 );
 
 // Middleware to authenticate frontend users
-export const isPatientAuthenticated = async (
+export const isPatientAuthenticated = catchAsyncErrors(
   async (req, res, next) => {
     const token = req.cookies.patientToken;
     if (!token) {
