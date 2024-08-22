@@ -2,6 +2,7 @@ import { User } from "../models/userSchema.js";
 import { catchAsyncErrors } from "./catchAsyncErrors.js";
 import ErrorHandler from "./error.js";
 import jwt from "jsonwebtoken";
+
 const JWT_SECRET_KEY="asjhdkjahkjdlfhksahfksad";
 // Middleware to authenticate dashboard users
 export const isAdminAuthenticated = catchAsyncErrors(
@@ -24,7 +25,7 @@ export const isAdminAuthenticated = catchAsyncErrors(
 );
 
 // Middleware to authenticate frontend users
-export const isPatientAuthenticated = catchAsyncErrors(
+export const isPatientAuthenticated = async (
   async (req, res, next) => {
     const token = req.cookies.patientToken;
     if (!token) {
