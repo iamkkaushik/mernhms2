@@ -3,6 +3,9 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const JWT_EXPIRES ="7d";
+const JWT_SECRET_KEY="asjhdkjahkjdlfhksahfksad";
+
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -72,8 +75,8 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 };
 
 userSchema.methods.generateJsonWebToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRES,
+  return jwt.sign({ id: this._id }, JWT_SECRET_KEY, {
+    expiresIn: JWT_EXPIRES,
   });
 };
 
